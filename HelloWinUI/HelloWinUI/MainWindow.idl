@@ -1,0 +1,9 @@
+namespace HelloWinUI
+{
+    [default_interface]
+    runtimeclass MainWindow : Microsoft.UI.Xaml.Window
+    {
+        MainWindow();
+        Microsoft.UI.Xaml.Controls.SwapChainPanel swapChainPanel;
+    }
+}
