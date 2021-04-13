@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 
-#include "App.h"
-#include "MainWindow.h"
+#include "App.xaml.h"
+#include "MainWindow.xaml.h"
 
 using namespace winrt;
 using namespace Windows::Foundation;

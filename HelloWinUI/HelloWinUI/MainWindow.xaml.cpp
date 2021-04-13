@@ -1,8 +1,10 @@
 ﻿#include "pch.h"
-#include "MainWindow.h"
+#include "MainWindow.xaml.h"
 #if __has_include("MainWindow.g.cpp")
 #include "MainWindow.g.cpp"
 #endif
+
+#include "Window.h"
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
@@ -15,5 +17,9 @@ namespace winrt::HelloWinUI::implementation
     MainWindow::MainWindow()
     {
         InitializeComponent();
+
+        ::Window window(swapChainPanel());
+
+        window.StartRenderLoop();
     }
 }

@@ -6,7 +6,10 @@
 
 #include <dxgi1_6.h>
 #include <d3d12.h>
-//#include <directx/d3dx12.h>
+#define D3DX12_NO_STATE_OBJECT_HELPERS
+#include <directx/d3dx12.h>
+
+#include <concrt.h>
 
 // Undefine GetCurrentTime macro to prevent
 // conflict with Storyboard::GetCurrentTime
@@ -15,6 +18,8 @@
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Windows.ApplicationModel.Activation.h>
+#include <winrt/Windows.System.Threading.h>
+#include <winrt/Windows.UI.Core.h>
 #include <winrt/Microsoft.UI.Composition.h>
 #include <winrt/Microsoft.UI.Xaml.h>
 #include <winrt/Microsoft.UI.Xaml.Controls.h>
