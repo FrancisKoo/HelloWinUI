@@ -1,13 +1,15 @@
 #include "pch.h"
 #include "Window.h"
 
-#include <windows.ui.xaml.media.dxinterop.h>
+#include <microsoft.ui.xaml.media.dxinterop.h>
+#include <Unknwn.h>
 
 using namespace winrt;
 using namespace Windows::Foundation;
 using namespace Windows::System::Threading;
 using namespace Concurrency;
 using namespace Windows::UI::Core;
+using namespace Microsoft::System;
 using namespace Microsoft::UI::Xaml::Controls;
 
 Window::Window(SwapChainPanel const& swapChainPanel) : 
@@ -205,11 +207,12 @@ void Window::LoadPipeline()
 
 	// Associate swap chain with SwapChainPanel
 	// UI changes will need to be dispatched back to the UI thread
-	m_swapChainPanel.Dispatcher().RunAsync(CoreDispatcherPriority::High, [=]()
+	m_swapChainPanel.DispatcherQueue().TryEnqueue(DispatcherQueuePriority::High, [=]()
 		{
 			// Get backing native interface for SwapChainPanel
 			com_ptr<ISwapChainPanelNative> panelNative;
-			check_hresult(get_unknown(m_swapChainPanel)->QueryInterface(IID_PPV_ARGS(&panelNative)));
+			panelNative = m_swapChainPanel.as<ISwapChainPanelNative>();
+			//check_hresult(get_unknown(m_swapChainPanel)->QueryInterface(IID_PPV_ARGS(&panelNative)));
 
 			check_hresult(panelNative->SetSwapChain(m_swapChain.get()));
 		});
